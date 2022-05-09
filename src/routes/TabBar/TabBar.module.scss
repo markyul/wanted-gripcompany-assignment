@@ -1,0 +1,8 @@
+@use '/src/styles/constants/colors';
+@use '/src/styles/constants/sizes';
+
+.tabContainer {
+  width: 100%;
+  height: 40px;
+  border: 1px solid colors.$BLACK;
+}
