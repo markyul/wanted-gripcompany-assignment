@@ -1,14 +1,7 @@
 import styles from './Routes.module.scss'
-// import TodoList from './TodoList'
-import Weather from './Weathers'
 
 const App = () => {
-  return (
-    <div className={styles.app}>
-      {/* <TodoList /> */}
-      <Weather />
-    </div>
-  )
+  return <div className={styles.app}>무비</div>
 }
 
 export default App
