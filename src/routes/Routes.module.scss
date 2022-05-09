@@ -11,12 +11,13 @@
     position: relative;
     width: sizes.$APP_WIDTH;
     height: 640px;
+    padding-bottom: 5px;
     background-color: colors.$APP_BACKGROUND;
     border: 1px solid colors.$RED;
     border-radius: 20px;
 
     .header {
-      height: 40px;
+      height: sizes.$HEADER_HEIGHT;
       border: 1px solid gray;
     }
   }
