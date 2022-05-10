@@ -1,0 +1,62 @@
+@use '/src/styles/constants/colors';
+@use '/src/styles/constants/sizes';
+@use '/src/styles/mixins/flexbox';
+
+.cardContainer {
+  display: flex;
+  flex-direction: row;
+  background-color: colors.$CARD_BACKGROUND;
+  border-radius: 5px;
+
+  + .cardContainer {
+    margin-top: 20px;
+  }
+
+  .poster {
+    width: 80px;
+    height: 100px;
+
+    img {
+      width: 80px;
+      height: 100px;
+      border-radius: 5px 0 0 5px;
+      object-fit: cover;
+    }
+  }
+
+  article {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    padding: 15px 0 15px 10px;
+
+    dt {
+      width: 200px;
+      margin-bottom: 20px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    dd {
+      font-size: 14px;
+      color: colors.$CARD_SUB_TEXT;
+
+      + dd {
+        margin-top: 5px;
+      }
+    }
+  }
+
+  .bookmark {
+    width: 20px;
+
+    .bookmarkIcon {
+      color: colors.$WHITE;
+    }
+
+    .checkBoolmark {
+      color: colors.$YELLOW;
+    }
+  }
+}
