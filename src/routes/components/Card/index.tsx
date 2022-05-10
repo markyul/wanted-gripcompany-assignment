@@ -1,22 +1,26 @@
 import styles from './Card.module.scss'
 import { cx } from '../../../styles'
 import { FaStar } from 'react-icons/fa'
+import { ISearchItem } from '../../../types/movie.d'
+import defaultImage from '../../../assets/default_image.jpg'
 
 interface ICardProps {
-  title: string
-  image: string
-  year: string
-  type: string
+  movie: ISearchItem
   isCheck: boolean
 }
 
 const Card = (props: ICardProps) => {
-  const { title, image, year, type, isCheck } = props
+  const { movie, isCheck } = props
+  const { Title: title, Year: year, Type: type, Poster: poster, imdbID } = movie
+
+  const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
+    e.currentTarget.src = defaultImage
+  }
 
   return (
-    <div className={styles.cardContainer}>
+    <li key={imdbID} className={styles.cardContainer}>
       <aside className={styles.poster}>
-        <img src={image} alt='poster' />
+        <img src={poster} alt='poster' onError={handleImageError} />
       </aside>
       <article>
         <dt>{title}</dt>
@@ -26,7 +30,7 @@ const Card = (props: ICardProps) => {
       <aside className={styles.bookmark}>
         <FaStar className={cx(styles.bookmarkIcon, { [styles.checkBoolmark]: isCheck })} />
       </aside>
-    </div>
+    </li>
   )
 }
 

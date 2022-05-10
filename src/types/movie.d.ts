@@ -7,7 +7,8 @@ export interface ISearchItem {
 }
 
 export interface IMovieAPIRes {
-  Search: ISearchItem[]
-  totalResults: number // 검색 결과 전체 개수
+  Search?: ISearchItem[]
+  totalResults?: number // 검색 결과 전체 개수
   Response: bool
+  Error?: string
 }
