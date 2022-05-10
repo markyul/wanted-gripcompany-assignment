@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom'
 
 import styles from './TabBar.module.scss'
-import { cx } from '../../styles'
+import { cx } from '../../../styles'
 
 const TabBar = () => {
   return (
@@ -9,12 +9,12 @@ const TabBar = () => {
       <ul>
         <li>
           <NavLink to='/' className={({ isActive }) => cx({ [styles.isActive]: isActive })}>
-            Search
+            검색
           </NavLink>
         </li>
         <li>
           <NavLink to='bookmark' className={({ isActive }) => cx({ [styles.isActive]: isActive })}>
-            Book Mark
+            즐겨찾기
           </NavLink>
         </li>
       </ul>

@@ -3,6 +3,6 @@
 
 .container {
   height: calc(100% - sizes.$HEADER_HEIGHT - sizes.$TABBAR_HEIGHT);
-  padding: 20px;
+  padding: 10px 20px;
   overflow-y: auto;
 }

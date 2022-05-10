@@ -2,13 +2,16 @@ import { Routes, Route } from 'react-router-dom'
 
 import styles from './Routes.module.scss'
 import Main from './Main'
-import TabBar from './TabBar'
+import Header from './components/Header'
+import TabBar from './components/TabBar'
 
 const App = () => {
   return (
     <div className={styles.app}>
       <div className={styles.container}>
-        <header className={styles.header}>header</header>
+        <Header>
+          <div>내 즐겨찾기</div>
+        </Header>
         <Routes>
           <Route path='/' element={<Main />} />
           <Route path='bookmark' element={<Main />} />
