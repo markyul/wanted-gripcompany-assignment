@@ -1,10 +1,23 @@
+import { NavLink } from 'react-router-dom'
+
 import styles from './TabBar.module.scss'
+import { cx } from '../../styles'
 
 const TabBar = () => {
   return (
     <nav className={styles.tabContainer}>
-      <button type='button'>Search</button>
-      <button type='button'>Book Mark</button>
+      <ul>
+        <li>
+          <NavLink to='/' className={({ isActive }) => cx({ [styles.isActive]: isActive })}>
+            Search
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to='bookmark' className={({ isActive }) => cx({ [styles.isActive]: isActive })}>
+            Book Mark
+          </NavLink>
+        </li>
+      </ul>
     </nav>
   )
 }

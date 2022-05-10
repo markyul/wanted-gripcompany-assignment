@@ -9,12 +9,27 @@
   padding-top: 5px;
   border-top: 1px solid colors.$CARD_BACKGROUND;
 
-  button {
-    @include flexbox.flexbox;
-    flex: 1;
+  ul {
+    display: flex;
+    width: 100%;
 
-    + button {
-      border-left: 1px solid colors.$WHITE;
+    li {
+      @include flexbox.flexbox;
+      flex: 1;
+      font-size: 14px;
+
+      + li {
+        border-left: 1px solid colors.$WHITE;
+      }
+
+      a {
+        letter-spacing: 0.05em;
+      }
+
+      .isActive {
+        font-weight: bold;
+        letter-spacing: 0.05em;
+      }
     }
   }
 }
