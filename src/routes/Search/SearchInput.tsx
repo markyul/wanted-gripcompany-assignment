@@ -1,15 +1,17 @@
-import { FormEvent, ChangeEvent } from 'react'
+import { FormEvent, ChangeEvent, SetStateAction } from 'react'
 
 import { AiOutlineSearch } from 'react-icons/ai'
 import { useState } from 'hooks'
 import styles from './Search.module.scss'
 
 interface Props {
+  search: string
+  setSearch: React.Dispatch<SetStateAction<string>>
   getMovies: (search: string, pageNum: number) => void
 }
 
-const SearchInput = ({ getMovies }: Props) => {
-  const [search, setSearch] = useState<string>('')
+const SearchInput = ({ search, setSearch, getMovies }: Props) => {
+  // const [search, setSearch] = useState<string>('')
 
   const handleSearch = (e?: FormEvent<HTMLFormElement>) => {
     e?.preventDefault()
