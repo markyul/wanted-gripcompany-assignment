@@ -1,6 +1,7 @@
+import { FaStar } from 'react-icons/fa'
+
 import styles from './Card.module.scss'
 import { cx } from '../../../styles'
-import { FaStar } from 'react-icons/fa'
 import { ISearchItem } from '../../../types/movie.d'
 import defaultImage from '../../../assets/default_image.jpg'
 

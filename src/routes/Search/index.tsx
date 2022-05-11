@@ -1,19 +1,22 @@
-import { useState, useEffect } from 'hooks'
-
+import { useState, useCallback } from 'hooks'
 import styles from './Search.module.scss'
+
 import Header from '../components/Header'
 import Card from '../components/Card'
+import SearchInput from './SearchInput'
 import { IMovieAPIRes, ISearchItem } from '../../types/movie.d'
 import { getMovieApi } from '../../services/movies'
 
 const Search = () => {
   //   const [apiResult, setApiResult] = useState<IMovieAPIRes>()
-  const [movieList, setMovieList] = useState<ISearchItem[] | undefined>([])
+  const [movieList, setMovieList] = useState<ISearchItem[]>([])
 
-  useEffect(() => {
+  // useEffect(() => {}, [])
+
+  const getMovies = useCallback((search: string, pageNum: number) => {
     getMovieApi({
-      s: 'dafasfa',
-      page: 1,
+      s: search,
+      page: pageNum,
     }).then((res) => {
       //   setApiResult(res.data)
 
@@ -22,17 +25,25 @@ const Search = () => {
       //   console.log(res.data)
       //   console.log('then에서 에러?')
 
-      setMovieList(res.data.Search)
+      if (pageNum === 1) {
+        setMovieList(res.data.Search)
+      } else {
+        res.data.Search?.forEach((item) => setMovieList((prev) => [...prev, item]))
+      }
     })
   }, [])
 
   return (
     <>
       <Header>
-        <div>내 즐겨찾기</div>
+        <SearchInput getMovies={getMovies} />
       </Header>
       <main className={styles.container}>
-        <ul>{movieList && movieList.map((data) => <Card key={data.imdbID} movie={data} isCheck={false} />)}</ul>
+        {movieList.length ? (
+          <ul>{movieList && movieList.map((data) => <Card key={data.imdbID} movie={data} isCheck={false} />)}</ul>
+        ) : (
+          <div className={styles.searchEmpty}>검색 결과가 없습니다.</div>
+        )}
       </main>
     </>
   )
