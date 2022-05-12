@@ -15,7 +15,5 @@ export const getMovieApi = (params: Params) =>
     params: {
       ...params,
       apikey: API_KEY,
-      // s: params.search,
-      // page: params.page,
     },
   })

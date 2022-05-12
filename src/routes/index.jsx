@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router-dom'
 
 import styles from './Routes.module.scss'
-import Search from './Search'
+import Search from './SearchPage'
 import TabBar from './components/TabBar'
 
 const App = () => {

@@ -1,7 +1,7 @@
 import { FormEvent, ChangeEvent, SetStateAction } from 'react'
 
 import { AiOutlineSearch } from 'react-icons/ai'
-import styles from './Search.module.scss'
+import styles from './SearchPage.module.scss'
 
 interface Props {
   search: string
