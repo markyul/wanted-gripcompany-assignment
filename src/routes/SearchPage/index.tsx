@@ -45,7 +45,7 @@ const SearchPage = () => {
           Search ? setMovieList(Search) : setMovieList([])
           setTotalResult(totalResults || 0)
         } else {
-          Search && Search?.forEach((item) => setMovieList((prev) => [...prev, item]))
+          Search && setMovieList((prev) => [...prev, ...Search])
         }
       }
     })
