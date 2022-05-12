@@ -24,6 +24,11 @@
   padding: 10px 20px;
   overflow-y: auto;
 
+  .loading {
+    @include flexbox.flexbox;
+    padding: 5px;
+  }
+
   .searchEmpty {
     @include flexbox.flexbox;
     height: 100%;

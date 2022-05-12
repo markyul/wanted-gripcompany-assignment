@@ -11,8 +11,10 @@ const Search = () => {
   //   const [apiResult, setApiResult] = useState<IMovieAPIRes>()
   const [search, setSearch] = useState<string>('')
   const [movieList, setMovieList] = useState<ISearchItem[]>([])
-  const [page, setPage] = useState<number>(2)
+  const [nextPage, setNextPage] = useState<number>(2)
   const [totalResult, setTotalResult] = useState<number>(0)
+  const [loading, setLoading] = useState<boolean>(false)
+  // const [errorMessage, setErrorMessage] = useState<string>('검색 결과가 없습니다.')
 
   const viewport = useRef(null)
   const target = useRef(null)
@@ -31,32 +33,36 @@ const Search = () => {
 
       if (pageNum === 1) {
         res.data.Search ? setMovieList(res.data.Search) : setMovieList([])
-        setPage(2)
+        setTotalResult(res.data.totalResults ? res.data.totalResults : 0)
       } else {
         res.data.Search && res.data.Search?.forEach((item) => setMovieList((prev) => [...prev, item]))
       }
     })
   }, [])
 
+  const handleIntersection = useCallback(
+    (entries: IntersectionObserverEntry[]) => {
+      // TODO: totalResults 수로 페이지 수가 한계면 멈춤
+      if ((nextPage - 1) * 10 < totalResult) {
+        entries.forEach(async (entry) => {
+          if (entry.isIntersecting) {
+            // observer.unobserve(entry.target)
+            setLoading(true)
+            await getMovies(search, nextPage)
+            setNextPage((prev) => prev + 1)
+            setLoading(false)
+            // observer.observe(entry.target)
+          }
+        })
+      }
+    },
+    [getMovies, nextPage, search, totalResult]
+  )
+
   useEffect(() => {
     const option = {
       root: viewport.current,
       threshold: 0,
-    }
-    console.log(movieList.length)
-    console.log(page)
-
-    const handleIntersection = (entries: IntersectionObserverEntry[], observer: IntersectionObserver) => {
-      // TODO: totalResults 수로 페이지 수가 한계면 멈춤
-
-      entries.forEach(async (entry) => {
-        if (entry.isIntersecting) {
-          // observer.unobserve(entry.target)
-          await getMovies(search, page)
-          setPage((prev) => prev + 1)
-          // observer.observe(entry.target)
-        }
-      })
     }
 
     let observer: IntersectionObserver
@@ -67,7 +73,7 @@ const Search = () => {
     }
 
     return () => observer && observer.disconnect()
-  }, [target, movieList, page, getMovies, search])
+  }, [handleIntersection])
 
   return (
     <>
@@ -78,8 +84,9 @@ const Search = () => {
         {movieList.length ? (
           <>
             <ul>{movieList && movieList.map((data) => <Card key={data.imdbID} movie={data} isCheck={false} />)}</ul>
-            <div ref={target}>마지막줄</div>
-            {/* TODO: 로딩 Component */}
+            <div className={styles.loading} ref={target}>
+              {loading && 'Loading...'}
+            </div>
           </>
         ) : (
           <div className={styles.searchEmpty}>검색 결과가 없습니다.</div>
