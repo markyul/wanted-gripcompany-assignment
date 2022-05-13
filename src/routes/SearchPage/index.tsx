@@ -94,7 +94,7 @@ const SearchPage = () => {
       <main className={styles.container} ref={viewport}>
         {movieList.length ? (
           <>
-            <ul>{movieList && movieList.map((data) => <Card key={data.imdbID} movie={data} isCheck={false} />)}</ul>
+            <ul>{movieList && movieList.map((data) => <Card key={data.imdbID} movie={data} />)}</ul>
             <div className={styles.loading} ref={target}>
               {loading && 'Loading...'}
             </div>

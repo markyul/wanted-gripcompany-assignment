@@ -14,5 +14,6 @@ export const modalContentState = atom<ISearchItem>({
     imdbID: '',
     Type: '',
     Poster: '',
+    isBookmark: false,
   },
 })
