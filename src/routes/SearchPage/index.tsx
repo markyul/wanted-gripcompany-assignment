@@ -1,55 +1,65 @@
 import { useState, useEffect, useCallback, useRef } from 'hooks'
-import styles from './SearchPage.module.scss'
+import { useRecoil } from 'hooks/state'
 
+import styles from './SearchPage.module.scss'
 import Header from '../components/Header'
 import Card from '../components/Card'
 import SearchInput from './SearchInput'
-import { ISearchItem } from '../../types/movie.d'
 import { getMovieApi } from '../../services/movies'
+import { movieListState } from 'states/movieList'
+import { setBookmarkMovies } from 'utils/bookmark'
 
 const SearchPage = () => {
   const [searchText, setSearchText] = useState<string>('')
-  const [movieList, setMovieList] = useState<ISearchItem[]>([])
   const [nextPage, setNextPage] = useState<number>(2)
   const [totalResult, setTotalResult] = useState<number>(0)
   const [loading, setLoading] = useState<boolean>(false)
   const [errorMessage, setErrorMessage] = useState<string>('검색 결과가 없습니다.')
 
+  const [movieList, setMovieList] = useRecoil(movieListState)
+
   const viewport = useRef(null)
   const target = useRef(null)
 
+  useEffect(() => {
+    setMovieList([])
+  }, [setMovieList])
+
   // API 결과를 가져와 추가 처리를 하기 위해 만듬
-  const getMovies = useCallback(async (text: string, pageNum: number) => {
-    await getMovieApi({
-      s: text,
-      page: pageNum,
-    }).then((res) => {
-      const { Response, Error, Search, totalResults } = res.data
+  const getMovies = useCallback(
+    async (text: string, pageNum: number) => {
+      await getMovieApi({
+        s: text,
+        page: pageNum,
+      }).then((res) => {
+        const { Response, Error, Search, totalResults } = res.data
 
-      const tooManyError = '검색 결과가 너무 많습니다.\n\n자세히 검색해주세요.'
-      const notFoundError = '검색 결과가 없습니다.'
-      const elseError = '서버에 문제가 있습니다.'
+        const tooManyError = '검색 결과가 너무 많습니다.\n\n자세히 검색해주세요.'
+        const notFoundError = '검색 결과가 없습니다.'
+        const elseError = '서버에 문제가 있습니다.'
 
-      // Response가 False로 올 때 Error 메세지가 여러 개 있다.
-      if (Response === 'False') {
-        setMovieList([])
-        if (Error === 'Too many results.') {
-          setErrorMessage(tooManyError)
-        } else if (Error === 'Movie not found!') {
-          setErrorMessage(notFoundError)
-        } else {
-          setErrorMessage(elseError)
+        // Response가 False로 올 때 Error 메세지가 여러 개 있다.
+        if (Response === 'False') {
+          setMovieList([])
+          if (Error === 'Too many results.') {
+            setErrorMessage(tooManyError)
+          } else if (Error === 'Movie not found!') {
+            setErrorMessage(notFoundError)
+          } else {
+            setErrorMessage(elseError)
+          }
+        } else if (Response === 'True') {
+          if (pageNum === 1) {
+            Search ? setMovieList(setBookmarkMovies(Search)) : setMovieList([])
+            setTotalResult(totalResults || 0)
+          } else {
+            Search && setMovieList((prev) => [...prev, ...setBookmarkMovies(Search)])
+          }
         }
-      } else if (Response === 'True') {
-        if (pageNum === 1) {
-          Search ? setMovieList(Search) : setMovieList([])
-          setTotalResult(totalResults || 0)
-        } else {
-          Search && setMovieList((prev) => [...prev, ...Search])
-        }
-      }
-    })
-  }, [])
+      })
+    },
+    [setMovieList]
+  )
 
   // 무한 스크롤 콜백 함수
   const handleIntersection = useCallback(
@@ -69,7 +79,7 @@ const SearchPage = () => {
     [getMovies, nextPage, searchText, totalResult]
   )
 
-  // 무한 스크롤
+  // 무한 스크롤을 위한 초기화
   useEffect(() => {
     const option = {
       root: viewport.current,
@@ -94,7 +104,7 @@ const SearchPage = () => {
       <main className={styles.container} ref={viewport}>
         {movieList.length ? (
           <>
-            <ul>{movieList && movieList.map((data) => <Card key={data.imdbID} movie={data} isCheck={false} />)}</ul>
+            <ul>{movieList && movieList.map((data) => <Card key={data.imdbID} movie={data} />)}</ul>
             <div className={styles.loading} ref={target}>
               {loading && 'Loading...'}
             </div>

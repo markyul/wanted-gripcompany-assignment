@@ -4,6 +4,7 @@ export interface ISearchItem {
   imdbID: string
   Type: string
   Poster: string
+  isBookmark: boolean
 }
 
 export interface IMovieAPIRes {
