@@ -39,7 +39,7 @@ const Card = ({ movie }: ICardProps) => {
         <dd>Type: {type}</dd>
       </article>
       <aside className={styles.bookmark}>
-        <FaStar className={cx(styles.bookmarkIcon, { [styles.checkBoolmark]: isBookmark })} />
+        <FaStar size={16} className={cx(styles.bookmarkIcon, { [styles.checkBoolmark]: isBookmark })} />
       </aside>
     </button>
   )

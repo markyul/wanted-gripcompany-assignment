@@ -53,7 +53,7 @@ const BookmarkModal = () => {
         </div>
         <div className={styles.buttonContainer}>
           <button type='button' onClick={handleBookmark}>
-            {content.isBookmark ? '즐겨찾기 해제' : '즐겨찾기'}
+            {content.isBookmark ? '즐겨찾기 제거' : '즐겨찾기'}
           </button>
           <button type='button' onClick={handleClose}>
             닫기
