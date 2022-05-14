@@ -21,15 +21,18 @@ const BookmarkModal = () => {
   const handleClose = () => {
     setOpenModal((prev) => !prev)
   }
-
   const handleBookmark = () => {
     const bookmarkMovies: ISearchItem[] = store.get('bookmark')
 
     if (content.isBookmark) {
+      // 즐겨찾기 해제
       const filterMovies = bookmarkMovies.filter((movie) => movie.imdbID !== content.imdbID)
       store.set('bookmark', filterMovies)
     } else {
-      bookmarkMovies ? store.set('bookmark', [...bookmarkMovies, content]) : store.set('bookmark', [content])
+      // 즐겨찾기 등록
+      const addContent = { ...content, isBookmark: true }
+
+      bookmarkMovies ? store.set('bookmark', [...bookmarkMovies, addContent]) : store.set('bookmark', [addContent])
     }
     setMovieList(changeBookmark(moiveList, content.imdbID, content.isBookmark))
     setOpenModal((prev) => !prev)

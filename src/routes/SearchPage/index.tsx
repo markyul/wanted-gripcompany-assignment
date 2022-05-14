@@ -21,6 +21,10 @@ const SearchPage = () => {
   const viewport = useRef(null)
   const target = useRef(null)
 
+  useEffect(() => {
+    setMovieList([])
+  }, [setMovieList])
+
   // API 결과를 가져와 추가 처리를 하기 위해 만듬
   const getMovies = useCallback(
     async (text: string, pageNum: number) => {
