@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom'
 
 import styles from './TabBar.module.scss'
-import { cx } from '../../../styles'
+import { cx } from 'styles'
 
 const TabBar = () => {
   return (

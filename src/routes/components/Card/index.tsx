@@ -2,10 +2,10 @@ import { useRecoil } from 'hooks/state'
 import { FaStar } from 'react-icons/fa'
 
 import styles from './Card.module.scss'
-import { cx } from '../../../styles'
-import { ISearchItem } from '../../../types/movie.d'
-import defaultImage from '../../../assets/default_image.jpg'
+import defaultImage from 'assets/default_image.jpg'
+import { cx } from 'styles'
 import { modalOpenState, modalContentState } from 'states/bookmarkModal'
+import { ISearchItem } from 'types/movie.d'
 
 interface ICardProps {
   movie: ISearchItem
@@ -39,7 +39,7 @@ const Card = ({ movie }: ICardProps) => {
         <dd>Type: {type}</dd>
       </article>
       <aside className={styles.bookmark}>
-        <FaStar className={cx(styles.bookmarkIcon, { [styles.checkBoolmark]: isBookmark })} />
+        <FaStar size={16} className={cx(styles.bookmarkIcon, { [styles.checkBoolmark]: isBookmark })} />
       </aside>
     </button>
   )

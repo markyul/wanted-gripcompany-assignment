@@ -5,22 +5,28 @@
 .cardContainer {
   display: flex;
   flex-direction: row;
+  width: calc(100% - 20px);
+  margin-left: 20px;
   background-color: colors.$CARD_BACKGROUND;
   border-radius: 5px;
   box-shadow: 2px 2px 5px black;
 
   + .cardContainer {
-    margin-top: 20px;
+    margin-top: 30px;
   }
 
   .poster {
+    position: relative;
     width: 80px;
     height: 100px;
 
     img {
+      position: absolute;
+      bottom: 10px;
+      left: -20px;
       width: 80px;
       height: 100px;
-      border-radius: 5px 0 0 5px;
+      border-radius: 5px;
       object-fit: cover;
     }
   }
@@ -29,7 +35,7 @@
     display: flex;
     flex: 1;
     flex-direction: column;
-    padding: 12px 0 12px 10px;
+    padding: 10px;
     text-align: left;
 
     dt {
@@ -52,7 +58,8 @@
   }
 
   .bookmark {
-    width: 20px;
+    margin-top: 5px;
+    margin-right: 5px;
 
     .bookmarkIcon {
       color: colors.$WHITE;

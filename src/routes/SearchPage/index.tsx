@@ -2,10 +2,10 @@ import { useState, useEffect, useCallback, useRef } from 'hooks'
 import { useRecoil } from 'hooks/state'
 
 import styles from './SearchPage.module.scss'
+import SearchInput from './SearchInput'
 import Header from '../components/Header'
 import Card from '../components/Card'
-import SearchInput from './SearchInput'
-import { getMovieApi } from '../../services/movies'
+import { getMovieApi } from 'services/movies'
 import { movieListState } from 'states/movieList'
 import { setBookmarkMovies } from 'utils/bookmark'
 
