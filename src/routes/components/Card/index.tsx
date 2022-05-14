@@ -25,6 +25,7 @@ const Card = ({ movie }: ICardProps) => {
   const handleClick = () => {
     setOpenModal((prev) => !prev)
     setContent(movie)
+    // console.log(movie)
   }
 
   return (

@@ -2,13 +2,16 @@ import { useRecoil } from 'hooks/state'
 import store from 'store'
 
 import styles from './BookmarkModal.module.scss'
-import { ISearchItem } from 'types/movie.d'
-import { modalOpenState, modalContentState } from 'states/bookmarkModal'
 import defaultImage from 'assets/default_image.jpg'
+import { ISearchItem } from 'types/movie.d'
+import { movieListState } from 'states/movieList'
+import { modalOpenState, modalContentState } from 'states/bookmarkModal'
+import { changeBookmark } from 'utils/bookmark'
 
 const BookmarkModal = () => {
   const [, setOpenModal] = useRecoil(modalOpenState)
   const [content] = useRecoil(modalContentState)
+  const [moiveList, setMovieList] = useRecoil(movieListState)
 
   // 포스터 이미지를 불러오지 못했을 때 기본 이미지로 대체
   const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
@@ -17,18 +20,19 @@ const BookmarkModal = () => {
 
   const handleClose = () => {
     setOpenModal((prev) => !prev)
-    console.log(store.get('bookmark'))
-    // store.remove('bookmark')
   }
 
   const handleBookmark = () => {
     const bookmarkMovies: ISearchItem[] = store.get('bookmark')
+
     if (content.isBookmark) {
       const filterMovies = bookmarkMovies.filter((movie) => movie.imdbID !== content.imdbID)
       store.set('bookmark', filterMovies)
     } else {
       bookmarkMovies ? store.set('bookmark', [...bookmarkMovies, content]) : store.set('bookmark', [content])
     }
+    setMovieList(changeBookmark(moiveList, content.imdbID, content.isBookmark))
+    setOpenModal((prev) => !prev)
   }
 
   return (
