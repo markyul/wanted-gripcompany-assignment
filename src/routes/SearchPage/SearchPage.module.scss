@@ -1,0 +1,37 @@
+@use '/src/styles/constants/colors';
+@use '/src/styles/constants/sizes';
+@use '/src/styles/mixins/flexbox';
+
+.searchForm {
+  div {
+    @include flexbox.flexbox;
+
+    input {
+      padding: 0 5px;
+      border-bottom: 1px solid colors.$GRAYA;
+    }
+
+    button {
+      // height: 100%;
+      margin-left: 5px;
+      font-size: 18px;
+    }
+  }
+}
+
+.container {
+  height: sizes.$MAIN_HEIGHT;
+  padding: 10px 20px;
+  overflow-y: auto;
+
+  .loading {
+    @include flexbox.flexbox;
+    padding: 5px;
+  }
+
+  .errorMessage {
+    @include flexbox.flexbox;
+    height: 100%;
+    white-space: pre-wrap;
+  }
+}
