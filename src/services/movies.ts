@@ -3,8 +3,6 @@ import { IMovieAPIRes } from 'types/movie.d'
 
 const MOVIE_BASE_URL = 'http://www.omdbapi.com/'
 const API_KEY = process.env.REACT_APP_API_KEY
-// 기업 api-key: 92e32667
-// 본인 api-key: b58b6479
 
 interface Params {
   s: string

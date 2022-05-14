@@ -7,6 +7,7 @@ import { ISearchItem } from 'types/movie.d'
 
 const SearchPage = () => {
   const bookmarkList: ISearchItem[] = store.get('bookmark')
+
   return (
     <>
       <Header>내 즐겨찾기</Header>

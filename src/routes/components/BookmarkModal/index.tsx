@@ -21,6 +21,7 @@ const BookmarkModal = () => {
   const handleClose = () => {
     setOpenModal((prev) => !prev)
   }
+
   const handleBookmark = () => {
     const bookmarkMovies: ISearchItem[] = store.get('bookmark')
 
@@ -34,6 +35,7 @@ const BookmarkModal = () => {
 
       bookmarkMovies ? store.set('bookmark', [...bookmarkMovies, addContent]) : store.set('bookmark', [addContent])
     }
+
     setMovieList(changeBookmark(moiveList, content.imdbID, content.isBookmark))
     setOpenModal((prev) => !prev)
   }
