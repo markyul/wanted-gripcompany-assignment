@@ -18,8 +18,8 @@ const SearchPage = () => {
 
   const [movieList, setMovieList] = useRecoil(movieListState)
 
-  const viewport = useRef(null)
-  const target = useRef(null)
+  const viewport = useRef<HTMLDivElement>(null)
+  const target = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     setMovieList([])
@@ -50,6 +50,7 @@ const SearchPage = () => {
           }
         } else if (Response === 'True') {
           if (pageNum === 1) {
+            viewport.current?.scrollTo({ top: 0 })
             Search ? setMovieList(setBookmarkMovies(Search)) : setMovieList([])
             setTotalResult(totalResults || 0)
           } else {
