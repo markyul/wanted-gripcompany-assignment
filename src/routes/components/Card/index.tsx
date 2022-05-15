@@ -29,19 +29,27 @@ const Card = ({ movie }: ICardProps) => {
   }
 
   return (
-    <button type='button' key={imdbID} className={styles.cardContainer} onClick={handleClick}>
-      <aside className={styles.poster}>
-        <img src={poster} alt='poster' onError={handleImageError} />
-      </aside>
-      <article>
-        <dt>{title}</dt>
-        <dd>Year: {year}</dd>
-        <dd>Type: {type}</dd>
-      </article>
-      <aside className={styles.bookmark}>
-        <FaStar size={16} className={cx(styles.bookmarkIcon, { [styles.checkBoolmark]: isBookmark })} />
-      </aside>
-    </button>
+    <li className={styles.cardContainer}>
+      <button type='button' key={imdbID} className={styles.card} onClick={handleClick}>
+        <div className={styles.poster}>
+          <img src={poster} alt='poster' onError={handleImageError} />
+        </div>
+        <article>
+          <header>{title}</header>
+          <dl>
+            <dt>Year:</dt>
+            <dd>{year}</dd>
+          </dl>
+          <dl>
+            <dt>Type:</dt>
+            <dd>{type}</dd>
+          </dl>
+        </article>
+        <div className={styles.bookmark}>
+          <FaStar size={16} className={cx(styles.bookmarkIcon, { [styles.checkBoolmark]: isBookmark })} />
+        </div>
+      </button>
+    </li>
   )
 }
 

@@ -3,70 +3,77 @@
 @use '/src/styles/mixins/flexbox';
 
 .cardContainer {
-  display: flex;
-  flex-direction: row;
-  width: calc(100% - 20px);
-  margin-left: 20px;
-  background-color: colors.$CARD_BACKGROUND;
-  border-radius: 5px;
-  box-shadow: 2px 2px 5px black;
-
   + .cardContainer {
     margin-top: 30px;
   }
 
-  .poster {
-    position: relative;
-    width: 80px;
-    height: 100px;
+  .card {
+    display: flex;
+    flex-direction: row;
+    width: calc(100% - 20px);
+    margin-left: 20px;
+    background-color: colors.$CARD_BACKGROUND;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px black;
 
-    img {
-      position: absolute;
-      bottom: 10px;
-      left: -20px;
+    .poster {
+      position: relative;
       width: 80px;
       height: 100px;
-      border-radius: 5px;
-      object-fit: cover;
-    }
-  }
 
-  article {
-    display: flex;
-    flex: 1;
-    flex-direction: column;
-    padding: 10px;
-    text-align: left;
-
-    dt {
-      width: 200px;
-      margin-bottom: 20px;
-      overflow: hidden;
-      font-size: 16px;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-    dd {
-      font-size: 12px;
-      color: colors.$CARD_SUB_TEXT;
-
-      + dd {
-        margin-top: 5px;
+      img {
+        position: absolute;
+        bottom: 10px;
+        left: -20px;
+        width: 80px;
+        height: 100px;
+        border-radius: 5px;
+        object-fit: cover;
       }
     }
-  }
 
-  .bookmark {
-    margin-top: 5px;
-    margin-right: 5px;
+    article {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      padding: 10px;
+      text-align: left;
 
-    .bookmarkIcon {
-      color: colors.$WHITE;
+      header {
+        width: 200px;
+        margin-bottom: 20px;
+        overflow: hidden;
+        font-size: 16px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      dl {
+        display: flex;
+        font-size: 12px;
+        color: colors.$CARD_SUB_TEXT;
+
+        + dl {
+          margin-top: 5px;
+        }
+
+        dd {
+          margin-left: 3px;
+        }
+      }
     }
 
-    .checkBoolmark {
-      color: colors.$YELLOW;
+    .bookmark {
+      margin-top: 5px;
+      margin-right: 5px;
+
+      .bookmarkIcon {
+        color: colors.$WHITE;
+      }
+
+      .checkBoolmark {
+        color: colors.$YELLOW;
+      }
     }
   }
 }
