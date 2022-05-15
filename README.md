@@ -7,14 +7,18 @@
 ├─assets
 │  └─svgs
 ├─hooks
+│  ├─state
 │  └─worker
 ├─routes
+│  ├─BookmarkPage
 │  ├─components
+│  │  ├─BookmarkModal
 │  │  ├─Card
 │  │  ├─Header
 │  │  └─TabBar
 │  └─SearchPage
 ├─services
+├─states
 ├─styles
 │  ├─base
 │  ├─constants
