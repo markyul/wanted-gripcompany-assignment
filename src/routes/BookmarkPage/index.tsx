@@ -6,7 +6,7 @@ import Card from '../components/Card'
 import { ISearchItem } from 'types/movie.d'
 
 const SearchPage = () => {
-  const bookmarkList: ISearchItem[] = store.get('bookmark')
+  const bookmarkList: ISearchItem[] = store.get('bookmark') ?? []
 
   return (
     <>
