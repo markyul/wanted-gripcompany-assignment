@@ -48,9 +48,15 @@ const BookmarkModal = () => {
             <img src={content.Poster} alt='poster' onError={handleImageError} />
           </aside>
           <article>
-            <dt>{content.Title}</dt>
-            <dd>Year: {content.Year}</dd>
-            <dd>Type: {content.Type}</dd>
+            <header>{content.Title}</header>
+            <dl>
+              <dt>Year:</dt>
+              <dd>{content.Year}</dd>
+            </dl>
+            <dl>
+              <dt>Type:</dt>
+              <dd>{content.Type}</dd>
+            </dl>
           </article>
         </div>
         <div className={styles.buttonContainer}>
